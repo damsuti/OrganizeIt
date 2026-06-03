@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -205,3 +206,50 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+=======
+# ==========================================
+# Caches e Arquivos Temporários do Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==========================================
+# Ambientes Virtuais (Virtual Envs)
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+
+# ==========================================
+# Segurança e Configurações locais (CRÍTICO)
+# ==========================================
+# Ignora as senhas e credenciais locais do projeto
+.env
+
+# ==========================================
+# Docker e Banco de Dados (PostgreSQL)
+# ==========================================
+# Ignora diretórios locais de dados caso os volumes do Docker fiquem na raiz
+.docker-data/
+postgres_data/
+
+# ==========================================
+# Arquivos de Sistema e Logs
+# ==========================================
+.DS_Store
+Thumbs.db
+*.log
+
+# ==========================================
+# Ferramentas de Desenvolvimento e IDEs
+# ==========================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+>>>>>>> 5a872f3 (Maybe the first commit to init)
