@@ -58,7 +58,7 @@ Acesse a aplicação pelo seu navegador em: http://localhost:5000
 A suíte de testes de integração do OrganizeIT valida o fluxo completo de autenticação (Registro, Duplicação de Contas, Login com Sucesso e Tratamento de Erros de Senha) direto no banco de dados de forma isolada.
 
 Para rodar os testes, garanta que o container do banco de dados esteja de pé (docker-compose up -d) e execute o comando abaixo na raiz do projeto:
-# Executa a suite completa em modo descritivo (verbose)
 ```
+# Executa a suite completa em modo descritivo (verbose)
 PYTHONPATH=. pytest -v
 ```
