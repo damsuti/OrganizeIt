@@ -60,8 +60,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
     if (response.ok) {
         showAlert(data.success, 'success');
-        // Aqui simulamos o sucesso. No futuro, redirecionamos para o dashboard.
-        setTimeout(() => alert('Sessão iniciada com sucesso no Docker! Próximo passo: Dashboard.'), 500);
+        // Redireciona de verdade para a nossa nova homepage dinâmica!
+        setTimeout(() => window.location.href = data.redirect, 800);
     } else {
         showAlert(data.error, 'danger');
     }

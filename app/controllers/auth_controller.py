@@ -38,4 +38,4 @@ def login_api():
     session['user_id'] = user['id']
     session['username'] = user['username']
 
-    return jsonify({"success": "Login efetuado! Redirecionando..."}), 200
+    return jsonify({"success": "Login efetuado! Redirecionando...", "redirect": "/dashboard"}), 200 

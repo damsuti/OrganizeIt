@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrganizeIT - Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Força a altura de 100% na tela e divide o layout */
+        html, body { height: 100%; overflow: hidden; background-color: #f8f9fa; }
+        .wrapper { display: flex; flex-direction: column; height: 100%; }
+        .main-content { display: flex; flex: 1; overflow: hidden; }
+        
+        /* Layout Proporcional: Calendário com 47% de largura e 100% de altura */
+        .calendar-section { width: 47%; height: 100%; overflow-y: auto; border-right: 2px solid #dee2e6; background: white; padding: 20px; }
+        
+        /* Espaço reservado para os futuros Dashboards em Pandas (53% de largura) */
+        .dashboard-section { width: 53%; height: 100%; overflow-y: auto; padding: 20px; }
+        
+        .grid-cell { min-height: 50px; background-color: #fafafa; border: 1px solid #dee2e6; padding: 4px; font-size: 0.8rem; }
+        .task-badge { background-color: #cfe2ff; color: #084298; border: 1px solid #b6d4fe; padding: 4px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4 shadow-sm">
+            <a class="navbar-brand fw-bold" href="#">OrganizeIT 🚀</a>
+            <div class="ms-auto d-flex align-items-center">
+                <span class="text-white me-3">Olá, <strong>{{ username }}</strong></span>
+                <button class="btn btn-light btn-sm me-2" data-bs-toggle="modal" data-bs-target="#taskModal">➕ Nova Tarefa</button>                <a href="/logout" class="btn btn-danger btn-sm">Sair</a>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            
+            <div class="calendar-section">
+                <h4 class="mb-3 text-secondary text-center fw-bold">📅 Agenda de Tarefas</h4>
+                <div class="table-responsive shadow-sm rounded">
+                    <table class="table table-bordered text-center align-middle mb-0" id="calendar-table">
+                        <thead class="table-light text-primary sticky-top">
+                            <tr>
+                                <th style="width: 15%;">Hora</th>
+                                <th style="width: 14%;">Seg</th>
+                                <th style="width: 14%;">Ter</th>
+                                <th style="width: 14%;">Qua</th>
+                                <th style="width: 14%;">Qui</th>
+                                <th style="width: 14%;">Sex</th>
+                                <th style="width: 15%;">Sáb</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendar-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-section d-flex align-items-center justify-content-center bg-light text-muted">
+                <div class="text-center">
+                    <h3 class="fw-bold">📊 Módulo de Analytics</h3>
+                    <p>Espaço reservado para os gráficos dinâmicos e análise de dados com Python Pandas.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar na Grade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="task-form">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Título da Tarefa / Código</label>
+                            <input type="text" id="task-title" class="form-control" placeholder="Ex: INE5670 - Desenvolvimento Móvel" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dia da Semana</label>
+                            <select id="task-day" class="form-select" required>
+                                <option value="Segunda">Segunda</option>
+                                <option value="Terça">Terça</option>
+                                <option value="Quarta">Quarta</option>
+                                <option value="Quinta">Quinta</option>
+                                <option value="Sexta">Sexta</option>
+                                <option value="Sábado">Sábado</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Horário de Início (Formato HH:MM)</label>
+                            <input type="time" id="task-time" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Salvar na Grade</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
