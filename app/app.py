@@ -1,8 +1,8 @@
 import os
 from flask import Flask
 from dotenv import load_dotenv
-from app.models.user_model import init_db
-from app.controllers.auth_controller import auth_bp
+from models.user_model import init_db
+from controllers.auth_controller import auth_bp
 
 load_dotenv()
 
