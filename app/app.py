@@ -1,4 +1,5 @@
 import os
+import secrets
 from flask import Flask
 from dotenv import load_dotenv
 from models.user_model import init_db
@@ -9,7 +10,7 @@ from controllers.home_controller import home_bp  # Importa o novo controller
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', 'dev-key-default-mvc')
+app.secret_key = secrets.token_hex(32)
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(home_bp)  # Registra as rotas do calendário
