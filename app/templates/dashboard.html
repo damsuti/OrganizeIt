@@ -94,9 +94,13 @@
                             <input type="time" id="task-time" class="form-control" required>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Salvar na Grade</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <button type="button" id="btn-delete-task" class="btn btn-danger" style="display: none;">🗑️ Excluir Tarefa</button>
+                        
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancel-task">Cancelar</button>
+                            <button type="submit" id="btn-submit-task" class="btn btn-primary">Salvar na Grade</button>
+                        </div>
                     </div>
                 </form>
             </div>

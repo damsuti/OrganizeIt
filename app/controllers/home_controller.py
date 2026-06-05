@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify, session, redirect, url_for
-from models.task_model import create_task, get_tasks_by_user
+from models.task_model import create_task, get_tasks_by_user, delete_task
 
 home_bp = Blueprint('home', __name__)
 
@@ -31,6 +31,27 @@ def add_task():
     
     create_task(session['user_id'], titulo,dia_semana,horario)
     return jsonify({"success":"Tarefa registrada com sucesso!"}), 201
+
+@home_bp.route('/api/tasks', methods=['DELETE'])
+def remove_task():
+    """Remove uma tarefa específica do usuário logado."""
+    data = request.get_json() or {}
+    titulo = data.get('titulo')
+    dia_semana = data.get('dia_semana')
+    horario = data.get('horario')
+
+    # Validação dos dados recebidos
+    if not titulo or not dia_semana or not horario:
+        return jsonify({"error": "Dados insuficientes para a exclusão."}), 400
+
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({"error": "Usuário não autenticado."}), 401
+
+    # Executa a query de deleção no banco Postgres
+    delete_task(user_id, titulo, dia_semana, horario)
+    
+    return jsonify({"success": "Tarefa excluída com sucesso!"}), 200
 
 @home_bp.route('/logout')
 def logout():

@@ -45,5 +45,16 @@ def get_tasks_by_user(usuario_id):
     conn.close()
     
     return [{"titulo": t[0], "dia_semana": t[1], "horario": t[2]} for t in tasks]
-    
+
+def delete_task(usuario_id, titulo, dia_semana, horario):
+    """Remove uma tarefa específica de um usuário no banco PostgreSQL."""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        DELETE FROM tarefas 
+        WHERE usuario_id = %s AND titulo = %s AND dia_semana = %s AND horario = %s;
+    ''', (usuario_id, titulo, dia_semana, horario))
+    conn.commit()
+    cur.close()
+    conn.close()
 
