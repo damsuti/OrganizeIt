@@ -17,5 +17,6 @@ app.register_blueprint(home_bp)  # Registra as rotas do calendário
 
 if __name__ == '__main__':
     init_db()
-    init_task_db()  # Executa a criação da tabela de tarefas na subida
+    init_task_db()
+    # O host precisa ser 0.0.0.0 para aceitar conexões de fora do container!
     app.run(host='0.0.0.0', port=5000)

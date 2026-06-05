@@ -3,18 +3,21 @@ import psycopg2
 from werkzeug.security import generate_password_hash
 
 def get_db_connection():
-    # Lê o host do arquivo .env
-    host_env = os.getenv('POSTGRES_HOST')
+    # Coleta as credenciais básicas do ambiente
+    user = os.getenv('POSTGRES_USER', 'admin_agenda')
+    password = os.getenv('POSTGRES_PASSWORD', 'senha_secreta_infra')
+    database = os.getenv('POSTGRES_DB', 'agenda_db')
+    port = os.getenv('POSTGRES_PORT', '5432')
     
-    # Inteligência de Infra: Se for 'db', altera para 127.0.0.1 para conseguir rodar localmente
-    host_final = '127.0.0.1' if host_env == 'db' else host_env
+    # Se estiver no Docker, lerá 'db' do compose. Se estiver local, assume '127.0.0.1'
+    host_final = os.getenv('POSTGRES_HOST', '127.0.0.1')
     
     return psycopg2.connect(
-        user=os.getenv('POSTGRES_USER'),
-        password=os.getenv('POSTGRES_PASSWORD'),
-        database=os.getenv('POSTGRES_DB'),
+        user=user,
+        password=password,
+        database=database,
         host=host_final,
-        port=os.getenv('POSTGRES_PORT')
+        port=port
     )
 
 def init_db():
