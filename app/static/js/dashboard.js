@@ -178,8 +178,10 @@ function abrirModalVisualizacao(task) {
     const btnCancel = document.getElementById('btn-cancel-task');
     
     if (btnSubmit) { btnSubmit.style.display = "inline-block"; btnSubmit.innerText = "Salvar Alterações"; }
-    if (btnDelete) btnDelete.style.display = "inline-block"; 
-    if (btnCancel) btnCancel.innerText = "Cancelar";
+    if (btnDelete) {
+        btnDelete.style.setProperty('display', 'inline-block', 'important'); // Força a exibição acima de tudo
+        btnDelete.removeAttribute('disabled');
+    } if (btnCancel) btnCancel.innerText = "Cancelar";
 
     const modalElement = document.getElementById('taskModal');
     if (modalElement) {
