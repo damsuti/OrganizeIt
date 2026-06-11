@@ -1,0 +1,31 @@
+services:
+  db_test:
+    image: postgres:15-alpine
+    container_name: agenda_db_test_container
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: agenda_test_db
+    # Não usamos volumes locais (postgres_data) para garantir que o banco 
+    # seja criado totalmente na memória/temporário do container
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user -d agenda_test_db"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  sut_tests: # SUT = System Under Test
+    build: ./app
+    container_name: agenda_pytest_container
+    environment:
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+      - POSTGRES_DB=agenda_test_db
+      - POSTGRES_HOST=db_test
+      - POSTGRES_PORT=5432
+      - FLASK_ENV=testing
+    depends_on:
+      db_test:
+        condition: service_healthy
+    # Sobrescreve o comando padrão do Flask para rodar diretamente o pytest
+    command: pytest -v
